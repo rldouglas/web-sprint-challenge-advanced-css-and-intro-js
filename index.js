@@ -208,12 +208,22 @@ const artists = [
 (1) Name of the first artist (0th index) in the array
 (2) Bio of the third artist (2nd index) in the array */
 let array= artists
-console.log(array[0])
-console.log(array[2])
+console.log(array[0].name)
+console.log(array[2].bio)
 
 /* Task 2: There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
 
-artists.splice(8, 1, 'Vincent Van Gough');
+artists.splice(8, 1, {
+  id: 8,
+  name: 'Vincent Van Gogh',
+  years: '1853 - 1890',
+  genre: 'Post-Impressionism',
+  nationality: 'Dutch',
+  bio:
+    'Vincent Willem van Gogh (Dutch: [ˈvɪnsɛnt ˈʋɪləm vɑŋ ˈɣɔx] (listen); 30 March 1853 – 29 July 1890) was a Dutch Post-Impressionist painter who is among the most famous and influential figures in the history of Western art. In just over a decade he created about 2,100 artworks, including around 860 oil paintings, most of them in the last two years of his life. They include landscapes, still lifes, portraits and self-portraits, and are characterised by bold colours and dramatic, impulsive and expressive brushwork that contributed to the foundations of modern art. However, he was not commercially successful, and his suicide at 37 followed years of mental illness and poverty.',
+  wikipedia: 'http://en.wikipedia.org/wiki/Vincent_van_Gogh',
+  paintings: 877,
+});
 console.log(artists);
 
 
@@ -227,7 +237,7 @@ console.log(artists);
  * it will return `The artist at index 0 is Amedeo Modigliani`.
 */
 function getArtistByIndex(array, index) {
-    return array[0]
+    return array[index]
   }
   console.log(array[0])
   /**
@@ -235,10 +245,19 @@ function getArtistByIndex(array, index) {
 
 /* Task 4: Create a function called get20s() that takes data as an argument and returns an array with names of artists who were born in and died in 20th century (1900-2000) example born in 1901 and died in 1959 - included / born in 1889 and died in 1925 not included - should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(array, artists, years){
-  return array(artists, "1901-1959")
+function get20s(array){
+  let artists19=[]
+ 
+  for (let i = 0; i < array.length; i++) {
+    let birth = array[i].years.slice(0, 4);
+    let death = array[i].years.slice(-4)
+    if (birth > 1899 && death <2000) {
+      artists19.push(array[i].name)
+    }
+  }
+return artists19
 }
-  console.log(get20s.years)
+  console.log(get20s(artists))
 
 
 
@@ -253,9 +272,10 @@ function get20s(array, artists, years){
  * Note that sucessfully invoking this function multiple times without refreshing your browser will continuously remove artists from the array until there are none left. If you refresh your browser, the data will reset.  
 */
 function removeArtist(artists, index){
-    artists.splice(0)
+    artists.splice(index, 1)
+    return artists.length
 }
-    console.log(artists.length);
+    console.log(removeArtist(artists, 0));
   
    
 
@@ -272,10 +292,21 @@ bio: Add 1-2 sentences (or use lorem ipsum)
 
 At the end, this function should return the new array with information added"*/
 
-function addArtist(){
-addArtist.push(["21", "RhondaDouglas", "1978-current", "WebDesign", "Filipino", "New to the Game"])
+let rhondaDouglas = {id: 21,
+name: 'RhondaDouglas',
+years: '1978-current',
+genre: 'WebDesign',
+nationality: 'Filipino',
+bio:
+  'Massage Therapist learning the anatomy of web development',
+paintings: 877,}
+
+function addArtist(object){
+  artists.push(object)
+return artists
+
   }
-  console.log(addArtist)
+  console.log(addArtist(rhondaDouglas))
 
 /* Task 7: Create a function called lotsOfArt() that takes one argument: 
 
@@ -285,10 +316,19 @@ and returns an array with names of artists who painted more than 100 paintings.
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ..."Albrecht Dürer"]*/
 
-function lotsOfArt(artists, array){
-array.paintings()
-
+function lotsOfArt(artists){
+let paintings = [];
+for (let i = 0; i <artists.length; i++){
+  if (artists[i].paintings>100){
+    paintings.push(artists[i].name)
+  }
+  
 }
+return paintings
+}
+
+console.log(lotsOfArt(artists))
+
 
 
 
