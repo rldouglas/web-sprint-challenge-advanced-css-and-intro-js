@@ -139,6 +139,11 @@ button:hover{
     flex-direction: column;
     justify-content: center;
     align-items: center;}
-div .artist {width: 75%; }
+div .artist {
+    width: 75%; }
     
+}
+div artist.bio {
+    width: 100%;
+
 }
